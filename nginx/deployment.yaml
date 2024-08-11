@@ -1,0 +1,48 @@
+# nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: k-nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 30000
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    name: http
+    port: 30000
+    targetPort: 80
+    nodePort: 30000
+  - protocol: TCP
+    name: test
+    port: 30001
+    nodePort: 30001
+    targetPort: 8888
+  type: NodePort
