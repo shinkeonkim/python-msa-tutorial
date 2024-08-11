@@ -36,13 +36,8 @@ spec:
     app: nginx
   ports:
   - protocol: TCP
-    name: http
+    name: ping-app
     port: 30000
     targetPort: 80
     nodePort: 30000
-  - protocol: TCP
-    name: test
-    port: 30001
-    nodePort: 30001
-    targetPort: 8888
   type: NodePort

@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app
+  name: ping-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: flask-app
+      app: ping-app
   template:
     metadata:
       labels:
-        app: flask-app
+        app: ping-app
     spec:
       containers:
-      - name: flask-app
-        image: k-flask-app:latest
+      - name: ping-app
+        image: k-ping-app:latest
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 5555
+        - containerPort: 5550
         resources:
           limits:
             cpu: "0.5"
@@ -30,12 +30,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-service
+  name: ping-service
 spec:
   selector:
-    app: flask-app
+    app: ping-app
   ports:
   - protocol: TCP
-    port: 5555
-    targetPort: 5555
+    port: 5550
+    targetPort: 5550
   type: ClusterIP

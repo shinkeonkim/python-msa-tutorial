@@ -16,11 +16,11 @@ FROM base as build
 # Copy the rest of the application code
 COPY . /app
 
-# Make port 5555 available to the world outside this container
-EXPOSE 5555
+# Make port 5550 available to the world outside this container
+EXPOSE 5550
 
 # Define environment variable
 ENV FLASK_APP=app.py
 
 # Run the application
-CMD ["pipenv", "run", "flask", "run", "--host=0.0.0.0", "--port=5555"]
+CMD ["pipenv", "run", "flask", "run", "--host=0.0.0.0", "--port=5550"]
